@@ -1,6 +1,10 @@
 # About This Project
 
-This project is from a video series by codemonkey. All code and assets were made / written by or for him as a learning resource for people online. Links to the corresponding videos can be found below.
+This project is from a video series by codemonkey.
+
+All code and assets were made / written by or for him as a learning resource for people online.
+
+Links to the corresponding videos can be found below.
 
 https://www.youtube.com/watch?v=AmGSEH7QcDg&ab_channel=CodeMonkey
 
