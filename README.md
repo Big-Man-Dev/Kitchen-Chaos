@@ -8,7 +8,8 @@ https://www.youtube.com/watch?v=7glCsF9fv3s&ab_channel=CodeMonkey
 
 ## Why am I doing this project?
 
-Am choosing to do this project to help learn more about a few topics.
-1. Project Managment
-2. Shaders
-3. NetCode for GameObjects
+My goals for this are to learn or produce the following
+1. Project management
+2. Learn basics of shaders
+3. Learn basics of NetCode for GameObjects
+4. Build more projects for portfolio
