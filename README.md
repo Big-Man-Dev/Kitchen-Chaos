@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=7glCsF9fv3s&ab_channel=CodeMonkey
 ### My goals for this are to learn or produce the following
 1. Project management
 2. Learn basics of shader graph
-3. Learn basics of NetCode for GameObjects
+3. Learn basics of Netcode for GameObjects
 4. Build more projects for portfolio
 
 I Think that a lot of the material here especially the netcode for gameobjects portion will be very helpful in producing my own unique projects / games in the future.
