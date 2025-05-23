@@ -1,6 +1,14 @@
+using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IKitchenObjectParent {
+
+    public static Player Instance { get; private set; }
+
+    public event EventHandler<OnSelectedCounterChangeEventArgs> OnSelectedCounterChange;
+    public class OnSelectedCounterChangeEventArgs : EventArgs {
+        public BaseCounter selectedCounter;
+    }
 
     [SerializeField] private GameInput gameInput;
     [SerializeField] private float moveSpeed = 5f;
@@ -8,34 +16,36 @@ public class Player : MonoBehaviour {
     [SerializeField] private float playerSize = 0.6f;
     [SerializeField] private float playerHeight = 2f;
     [SerializeField] private float interactDistance = 2f;
-    [SerializeField] private LayerMask countersLayerMask; 
+    [SerializeField] private LayerMask countersLayerMask;
+    [SerializeField] private Transform kitchenObjectHoldPoint;
 
+    private KitchenObject kitchenObject;
+    private BaseCounter selectedCounter;
     Vector2 inputVector = Vector2.zero;
     Vector3 moveDir = Vector3.zero;
     Vector3 lastInteractDirection = Vector3.zero;
     bool isWalking = false;
     bool canMove = false;
     float moveDistance;
-
+    private void Awake() {
+        if(Instance != null) {
+            Debug.Log("There is more than 1 player instance");
+        }
+        Instance = this;
+    }
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;    
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
-        inputVector = gameInput.GetMovementVectorNormalized();
-        moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-        if (moveDir != Vector3.zero) lastInteractDirection = moveDir;
-
-        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                clearCounter.Interact();
-            }
+        if (selectedCounter != null) {
+            selectedCounter.Interact(this);
         }
     }
 
     public void Update() {
         HandleMovement();
-        //HandleInteractions();
+        HandleInteractions();
     }
 
     public bool IsWalking() => isWalking; 
@@ -45,10 +55,10 @@ public class Player : MonoBehaviour {
         if (moveDir != Vector3.zero) lastInteractDirection = moveDir;
 
         if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                clearCounter.Interact();
-            }
-        }
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) {
+                if (baseCounter != selectedCounter) SetSelectedCounter(baseCounter);
+            } else SetSelectedCounter(null);
+        } else SetSelectedCounter(null);
     }
     private void HandleMovement() {
         inputVector = gameInput.GetMovementVectorNormalized();
@@ -74,4 +84,17 @@ public class Player : MonoBehaviour {
         if (moveDir != Vector3.zero) isWalking = true;
         else isWalking = false;
     }
+
+    private void SetSelectedCounter(BaseCounter selectedCounter) {
+        this.selectedCounter = selectedCounter;
+        OnSelectedCounterChange?.Invoke(this, new OnSelectedCounterChangeEventArgs { selectedCounter = selectedCounter });
+    }
+
+    public Transform GetKitchenObjectFollowTransform() => kitchenObjectHoldPoint;
+    public KitchenObject GetKitchenObject() => kitchenObject;
+    public void SetKitchenObject(KitchenObject kitchenObject) {
+        this.kitchenObject = kitchenObject;
+    }
+    public void ClearKitchenObject() => kitchenObject = null;
+    public bool HasKitchenObject() => kitchenObject != null;
 }

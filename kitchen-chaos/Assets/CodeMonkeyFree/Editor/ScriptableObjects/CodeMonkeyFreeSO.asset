@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1747891381
+  lastShownTimestamp: 1747979206
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1747891381
+  checkedLastUpdateTimestamp: 1747979206
   lastQOTDResponse:
     questionId: 183
     questionText: What does Normalizing a Vector do?
@@ -27,18 +27,18 @@ MonoBehaviour:
     answerC: Flatten the z
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1747891381
+  lastQotdTimestamp: 1747979206
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleMay252DGameAssets.png
     topText: HUGE bundle with literally 10,000+ 2D elements! 97% OFF! (ENDS SOON)
     topLink: humblebundle
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1747891381
+  lastDynamicHeaderTimestamp: 1747979206
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1747891381
+  websiteLatestMessageTimestamp: 1747979206
   websiteLatestVideos:
     videos:
     - youTubeId: 9WRioxheeSU
@@ -49,4 +49,4 @@ MonoBehaviour:
       title: What is Unity AI? (and Unity 6.2)
     - youTubeId: R-pqlx29MyE
       title: TOP 10 FREE NEW Assets MAY 2025!
-  websiteLatestVideosTimestamp: 1747891381
+  websiteLatestVideosTimestamp: 1747979206
