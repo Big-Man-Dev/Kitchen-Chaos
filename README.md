@@ -16,6 +16,7 @@ https://www.youtube.com/watch?v=7glCsF9fv3s&ab_channel=CodeMonkey
 1. Rebindable controls
 2. Learn basics of shader graph
 3. Learn basics of Netcode for GameObjects
-4. Build more projects for portfolio
+4. World Space Canvas
+5. Clean Code practices
 
 I Think that a lot of the material here especially the netcode for gameobjects portion will be very helpful in producing my own unique projects / games in the future.
