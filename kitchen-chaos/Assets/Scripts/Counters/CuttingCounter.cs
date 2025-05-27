@@ -1,15 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.Windows;
+using static IHasProgress;
 
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : BaseCounter, IHasProgress
 {
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOs;
     public event EventHandler<OnProgressChangeEventArgs> OnProgressChange;
     public event EventHandler OnCut;
-    public class OnProgressChangeEventArgs : EventArgs {
-        public float progressNormalized;
-    }
 
     private int cuttingProgress;
     public override void Interact(Player player) {
@@ -24,6 +22,9 @@ public class CuttingCounter : BaseCounter
             }
         } else {
             if (player.HasKitchenObject() == false) {
+                OnProgressChange?.Invoke(this, new OnProgressChangeEventArgs {
+                    progressNormalized = 0
+                });
                 GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
