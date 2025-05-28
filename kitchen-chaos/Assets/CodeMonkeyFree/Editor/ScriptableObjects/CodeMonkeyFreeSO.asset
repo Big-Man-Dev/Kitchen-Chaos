@@ -14,36 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1748370651
+  lastShownTimestamp: 1748458007
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1748370651
+  checkedLastUpdateTimestamp: 1748458007
   lastQOTDResponse:
-    questionId: 184
-    questionText: 'What is the result of this code:
-
-      <p>int money = 2000000000;
-      // $2 billion</p>
-
-      <p>money += 1000000000; // Adding $1 billion</p>'
-    answerA: money == 3000000000
-    answerB: money == -1294967296
-    answerC: money == 0
+    questionId: 185
+    questionText: What is the purpose of Unity Hub?
+    answerA: Provide a space for the community to interact
+    answerB: Manage different Unity versions and Projects
+    answerC: Dashboard for Unity services
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1748370651
+  lastQotdTimestamp: 1748458007
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleMay252DGameAssets.png
     topText: HUGE bundle with literally 10,000+ 2D elements! 97% OFF! (ENDS SOON)
     topLink: humblebundle
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1748370651
+  lastDynamicHeaderTimestamp: 1748458007
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1748370651
+  websiteLatestMessageTimestamp: 1748458007
   websiteLatestVideos:
     videos:
     - youTubeId: 29ejb-nzO1A
@@ -54,4 +49,4 @@ MonoBehaviour:
       title: I can't believe it's been ONE YEAR! (actually 4 birthdays)
     - youTubeId: 2qb92qCCKTA
       title: TOP 10 NEW Systems and Tools MAY 2025! | Unity Asset Store
-  websiteLatestVideosTimestamp: 1748370651
+  websiteLatestVideosTimestamp: 1748458007
