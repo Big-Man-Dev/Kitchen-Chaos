@@ -20,12 +20,14 @@ public class CuttingCounter : BaseCounter, IHasProgress
                     progressNormalized = (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax
                 });
             }
-        } else {
-            if (player.HasKitchenObject() == false) {
-                OnProgressChange?.Invoke(this, new OnProgressChangeEventArgs {
-                    progressNormalized = 0
-                });
-                GetKitchenObject().SetKitchenObjectParent(player);
+        } else if (player.HasKitchenObject() == false) {
+            OnProgressChange?.Invoke(this, new OnProgressChangeEventArgs {
+                progressNormalized = 0
+            });
+            GetKitchenObject().SetKitchenObjectParent(player);
+        } else if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
+            if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) {
+                GetKitchenObject().DestroySelf();
             }
         }
     }
