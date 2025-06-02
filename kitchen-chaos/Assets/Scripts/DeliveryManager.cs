@@ -6,6 +6,8 @@ public class DeliveryManager : MonoBehaviour
 {
     public event Action OnRecipeSpawned;
     public event Action OnRecipeDeleted;
+    public event Action OnRecipeSuccess;
+    public event Action OnRecipeFailed;
     public static DeliveryManager Instance { get; private set; }
     [SerializeField] private RecipeListSO recipeListSO;
     private List<RecipeSO> waitingRecipeSOList = new();
@@ -49,10 +51,12 @@ public class DeliveryManager : MonoBehaviour
                 if (plateContentsMatchesRecipe) {
                     waitingRecipeSOList.RemoveAt(i);
                     OnRecipeDeleted?.Invoke();
+                    OnRecipeSuccess?.Invoke();
                     return;
                 }
             }
         }
+        OnRecipeFailed?.Invoke();
         return;
     }
 
