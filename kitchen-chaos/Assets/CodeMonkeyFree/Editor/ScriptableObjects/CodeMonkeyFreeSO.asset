@@ -14,34 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1748812725
+  lastShownTimestamp: 1749002419
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1748812726
+  checkedLastUpdateTimestamp: 1749002419
   lastQOTDResponse:
-    questionId: 186
-    questionText: What is the main difference between the out and ref keywords? (behaviour
-      inside the function)
-    answerA: out doesn't need to be set; ref MUST be set
-    answerB: out MUST be set; ref doesn't need to be set
-    answerC: No difference
+    questionId: 187
+    questionText: 'Is this valid code?
+
+      <p>Vector3? targetPosition = new Vector3(10,
+      0, 0);</p>
+
+      <p>Vector3 moveToPosition = targetPosition;</p>'
+    answerA: Yes
+    answerB: No
+    answerC: 
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1748812726
+  lastQotdTimestamp: 1749002419
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/ultimateOverview70_6FreeUpdate.png
     topText: Learn how to use 70 Tools and Features! (Unity 6 Updated)
     topLink: ultimateunityoverview
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1748812726
+  lastDynamicHeaderTimestamp: 1749002419
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1748812726
+  websiteLatestMessageTimestamp: 1749002419
   websiteLatestVideos:
     videos:
+    - youTubeId: U5Wolv65yK8
+      title: Dev followed my FREE course, then made $150,000!
     - youTubeId: NzyU-WuXfk4
       title: TOP 20 Visual Assets to INSPIRE YOU! (MAY 2025)
     - youTubeId: iB1_PBY-BCQ
@@ -49,6 +55,4 @@ MonoBehaviour:
         Update)
     - youTubeId: 29ejb-nzO1A
       title: Is Schedule I a LOW EFFORT Game?
-    - youTubeId: YCj1VXyxtwI
-      title: Was I WRONG? Do Gamers really NOT care about AI?
-  websiteLatestVideosTimestamp: 1748812726
+  websiteLatestVideosTimestamp: 1749002419
