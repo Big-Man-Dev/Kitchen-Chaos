@@ -8,12 +8,23 @@ public class GameManager : MonoBehaviour
     private float waitingToStartTimer = 1f;
     private float countdownToStart = 3f;
     private float gamePlayingTimer;
-    private float gamePlayingTimerMax = 10f;
+    private float gamePlayingTimerMax = 30f;
+    private bool isGamePaused = false;
 
     public event EventHandler OnStateChange;
+    public event EventHandler OnGamePause;
+    public event EventHandler OnGameUnpause;
     private void Awake() {
         Instance = this;
     }
+    private void Start() {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e) {
+        TogglePauseGame();
+    }
+
     private void Update() {
         switch (state) {
             case State.WaitingToStart:
@@ -43,13 +54,23 @@ public class GameManager : MonoBehaviour
             case State.GameOver:
                 break;
         }
-        Debug.Log(state);
     }
     public bool isGamePlaying() => state == State.GamePlaying;
     public bool IsCountdownToStartActive() => state == State.CountdownToStart;
     public bool IsGameOver() => state == State.GameOver;
     public float GetCountDownToStartTimer() => countdownToStart;
     public float GetGamePlayingTimerNormalized() => 1 - (gamePlayingTimer / gamePlayingTimerMax);
+
+    public void TogglePauseGame() {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused) {
+            Time.timeScale = 0f;
+            OnGamePause?.Invoke(this, EventArgs.Empty);
+        }else {
+            Time.timeScale = 1f;
+            OnGameUnpause?.Invoke(this, EventArgs.Empty);
+        }
+    }
 
     private enum State {
         WaitingToStart,

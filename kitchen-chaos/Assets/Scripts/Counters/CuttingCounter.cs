@@ -10,6 +10,10 @@ public class CuttingCounter : BaseCounter, IHasProgress
     public event EventHandler OnCut;
     public static event EventHandler OnAnyCut;
 
+    new public static void ResetStaticData() {
+        OnAnyCut = null; 
+    }
+
     private int cuttingProgress;
     public override void Interact(Player player) {
         if (HasKitchenObject() == false) {
