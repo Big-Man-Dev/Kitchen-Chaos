@@ -1,6 +1,6 @@
 # About This Project
 
-This project is from a video series by **Code Mnnkey**.
+This project is from a video series by **Code Monkey**.
 
 All code / assets in this project was made by **Code Monkey** as a learning resource.
 
