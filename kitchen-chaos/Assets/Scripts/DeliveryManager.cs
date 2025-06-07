@@ -21,6 +21,7 @@ public class DeliveryManager : MonoBehaviour
         Instance = this;
     }
     private void Update() {
+        if (GameManager.Instance.isGamePlaying() == false) return;
         spawnRecipeTimer -= Time.deltaTime;
         if (spawnRecipeTimer <= 0f) {
             spawnRecipeTimer = spawnRecipeTimerMax;

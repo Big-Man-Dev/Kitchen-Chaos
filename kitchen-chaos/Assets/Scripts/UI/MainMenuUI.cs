@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,5 +16,6 @@ public class MainMenuUI : MonoBehaviour
             Application.Quit();
         });
         Time.timeScale = 1f;
+        if (Gamepad.all.Count > 0) playButton.Select();
     }
 }
