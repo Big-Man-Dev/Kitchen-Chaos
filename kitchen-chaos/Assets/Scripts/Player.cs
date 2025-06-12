@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Player : MonoBehaviour, IKitchenObjectParent {
+public class Player : NetworkBehaviour, IKitchenObjectParent {
 
-    public static Player Instance { get; private set; }
+    //public static Player Instance { get; private set; }
 
     public event EventHandler OnPickedSomething;
 
@@ -12,7 +13,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         public BaseCounter selectedCounter;
     }
 
-    [SerializeField] private GameInput gameInput;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private float playerSize = 0.6f;
@@ -30,14 +30,14 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     bool canMove = false;
     float moveDistance;
     private void Awake() {
-        if(Instance != null) {
+        /*if(Instance != null) {
             Debug.Log("There is more than 1 player instance");
         }
-        Instance = this;
+        Instance = this;*/
     }
     private void Start() {
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
-        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
@@ -55,13 +55,16 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     }
 
     public void Update() {
+        if (IsOwner == false) {
+            return;
+        }
         HandleMovement();
         HandleInteractions();
     }
 
     public bool IsWalking() => isWalking; 
     private void HandleInteractions() {
-        inputVector = gameInput.GetMovementVectorNormalized();
+        inputVector = GameInput.Instance.GetMovementVectorNormalized();
         moveDir = new Vector3(inputVector.x, 0, inputVector.y);
         if (moveDir != Vector3.zero) lastInteractDirection = moveDir;
 
@@ -72,7 +75,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         } else SetSelectedCounter(null);
     }
     private void HandleMovement() {
-        inputVector = gameInput.GetMovementVectorNormalized();
+        inputVector = GameInput.Instance.GetMovementVectorNormalized();
         moveDir = new Vector3(inputVector.x, 0, inputVector.y);
         moveDistance = moveSpeed * Time.deltaTime;
         canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDir, moveDistance);

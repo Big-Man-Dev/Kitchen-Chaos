@@ -14,40 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1749263077
+  lastShownTimestamp: 1749694016
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1749263077
+  checkedLastUpdateTimestamp: 1749694016
   lastQOTDResponse:
-    questionId: 188
-    questionText: What is the purpose of a namespace?
-    answerA: To confuse you
-    answerB: Better performance
-    answerC: Keep your code organized
+    questionId: 190
+    questionText: 'What is the value stored in percentage?
+
+      <p>int health =
+      25;</p>
+
+      <p>int healthMax = 100;</p>
+
+      <p>float percentage = health
+      / healthMax;</p>'
+    answerA: 0.25f
+    answerB: 0
+    answerC: 2.5f
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1749263077
+  lastQotdTimestamp: 1749694016
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/ultimateOverview70_6FreeUpdate.png
     topText: Learn how to use 70 Tools and Features! (Unity 6 Updated)
     topLink: ultimateunityoverview
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1749263077
+  lastDynamicHeaderTimestamp: 1749694016
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1749263077
+  websiteLatestMessageTimestamp: 1749694016
   websiteLatestVideos:
     videos:
+    - youTubeId: jPXFBmfInRQ
+      title: YOU can CHANGE the FUTURE of Unity!
     - youTubeId: IPwIpYP3dvg
       title: 70 Unity Tools and Features in 16 MINUTES!
     - youTubeId: U5Wolv65yK8
       title: Dev followed my FREE course, then made $150,000!
     - youTubeId: NzyU-WuXfk4
       title: TOP 20 Visual Assets to INSPIRE YOU! (MAY 2025)
-    - youTubeId: iB1_PBY-BCQ
-      title: Make BETTER games FASTER, Learn 70 Unity Tools and Features! (6th FREE
-        Update)
-  websiteLatestVideosTimestamp: 1749263077
+  websiteLatestVideosTimestamp: 1749694016
