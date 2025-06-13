@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class DeliveryManager : MonoBehaviour
+public class DeliveryManager : NetworkBehaviour
 {
     public event Action OnRecipeSpawned;
     public event Action OnRecipeDeleted;
@@ -21,21 +22,34 @@ public class DeliveryManager : MonoBehaviour
         Instance = this;
     }
     private void Update() {
+        if (IsServer == false) return;
         if (GameManager.Instance.isGamePlaying() == false) return;
         spawnRecipeTimer -= Time.deltaTime;
         if (spawnRecipeTimer <= 0f) {
             spawnRecipeTimer = spawnRecipeTimerMax;
             if (waitingRecipeSOList.Count < waitingRecipeMax) {
+                int waitingRecipeSOIndex = UnityEngine.Random.Range(0, recipeListSO.recipeSOList.Count);
                 RecipeSO waitingRecipeSO = recipeListSO.recipeSOList[UnityEngine.Random.Range(0, recipeListSO.recipeSOList.Count)];
-                waitingRecipeSOList.Add(waitingRecipeSO);
-                OnRecipeSpawned?.Invoke();
+                SpawnNewWaitingRecipeClientRpc(waitingRecipeSOIndex);
             }
         }
     }
 
+    [ClientRpc]
+    private void SpawnNewWaitingRecipeClientRpc(int waitingRecipeSOIndex) {
+        RecipeSO waitingRecipeSO = recipeListSO.recipeSOList[waitingRecipeSOIndex];
+        waitingRecipeSOList.Add(waitingRecipeSO);
+        OnRecipeSpawned?.Invoke();
+    }
+
     public void DeliverRecipe(PlateKitchenObject plateKitchenObject) {
+        if(plateKitchenObject.GetKitchenObjectSOList().Count == 0) {
+            DeliverIncorrectRecipeServerRpc();
+            return;
+        }
         for (int i = 0; i < recipeListSO.recipeSOList.Count; i++) {
             RecipeSO waitingRecipeSO = waitingRecipeSOList[i];
+            Debug.Log(i);
             if(waitingRecipeSO.kitchenObjectSOList.Count == plateKitchenObject.GetKitchenObjectSOList().Count) {
                 bool plateContentsMatchesRecipe = true;
                 foreach(KitchenObjectSO recipeKitchenObjectSO in waitingRecipeSO.kitchenObjectSOList) {
@@ -51,16 +65,35 @@ public class DeliveryManager : MonoBehaviour
                     }
                 }
                 if (plateContentsMatchesRecipe) {
-                    waitingRecipeSOList.RemoveAt(i);
-                    OnRecipeDeleted?.Invoke();
-                    OnRecipeSuccess?.Invoke();
-                    recipeDeliverCount++;
+                    DeliverCorrectRecipeServerRpc(i);
                     return;
                 }
             }
         }
-        OnRecipeFailed?.Invoke();
+        DeliverIncorrectRecipeServerRpc();
         return;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DeliverIncorrectRecipeServerRpc() {
+        DeliverIncorrectRecipeClientRpc();
+    }
+    [ClientRpc]
+    private void DeliverIncorrectRecipeClientRpc() {
+        OnRecipeFailed?.Invoke();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DeliverCorrectRecipeServerRpc(int index) {
+        DeliverCorrectRecipeClientRpc(index);
+    }
+
+    [ClientRpc]
+    private void DeliverCorrectRecipeClientRpc(int index) {
+        waitingRecipeSOList.RemoveAt(index);
+        OnRecipeDeleted?.Invoke();
+        OnRecipeSuccess?.Invoke();
+        recipeDeliverCount++;
     }
 
     public List<RecipeSO> GetWaitingRecipeSOList() => waitingRecipeSOList;

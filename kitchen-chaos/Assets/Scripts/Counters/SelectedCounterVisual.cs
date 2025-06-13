@@ -5,7 +5,19 @@ public class SelectedCounterVisual : MonoBehaviour
     [SerializeField] private BaseCounter baseCounter;
     [SerializeField] private GameObject[] visualGameObject;
     private void Start() {
-        //Player.Instance.OnSelectedCounterChange += Player_OnSelectedCounterChange;
+        if(Player.LocalInstance != null) {
+            Player.LocalInstance.OnSelectedCounterChange += Player_OnSelectedCounterChange;
+        }else {
+            Player.OnAnyPlayerSpawn += Player_OnAnyPlayerSpawn;
+        }
+
+    }
+
+    private void Player_OnAnyPlayerSpawn(object sender, System.EventArgs e) {
+        if(Player.LocalInstance != null) {
+            Player.LocalInstance.OnSelectedCounterChange -= Player_OnSelectedCounterChange;
+            Player.LocalInstance.OnSelectedCounterChange += Player_OnSelectedCounterChange;
+        }
     }
 
     private void Player_OnSelectedCounterChange(object sender, Player.OnSelectedCounterChangeEventArgs e) {

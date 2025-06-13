@@ -4,13 +4,19 @@ using Unity.Netcode;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent {
 
-    //public static Player Instance { get; private set; }
+    public static Player LocalInstance { get; private set; }
 
     public event EventHandler OnPickedSomething;
 
     public event EventHandler<OnSelectedCounterChangeEventArgs> OnSelectedCounterChange;
     public class OnSelectedCounterChangeEventArgs : EventArgs {
         public BaseCounter selectedCounter;
+    }
+    public static event EventHandler OnAnyPlayerSpawn;
+    public static event EventHandler OnAnyPickedSomething;
+    public static void ResetStaticData() {
+        OnAnyPlayerSpawn = null;
+        OnAnyPickedSomething = null;
     }
 
     [SerializeField] private float moveSpeed = 5f;
@@ -29,17 +35,14 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
     bool isWalking = false;
     bool canMove = false;
     float moveDistance;
-    private void Awake() {
-        /*if(Instance != null) {
-            Debug.Log("There is more than 1 player instance");
-        }
-        Instance = this;*/
-    }
     private void Start() {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
-
+    public override void OnNetworkSpawn() {
+        if (IsOwner) LocalInstance = this;
+        OnAnyPlayerSpawn?.Invoke(this, EventArgs.Empty);
+    }
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
         if (GameManager.Instance.isGamePlaying() == false) return;
         if (selectedCounter != null) {
@@ -108,8 +111,14 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
     public KitchenObject GetKitchenObject() => kitchenObject;
     public void SetKitchenObject(KitchenObject kitchenObject) {
         this.kitchenObject = kitchenObject;
-        if (kitchenObject != null) OnPickedSomething?.Invoke(this, EventArgs.Empty);
+        if (kitchenObject != null) {
+            OnPickedSomething?.Invoke(this, EventArgs.Empty);
+            OnAnyPickedSomething?.Invoke(this, EventArgs.Empty);
+        }
     }
     public void ClearKitchenObject() => kitchenObject = null;
     public bool HasKitchenObject() => kitchenObject != null;
+    public NetworkObject GetNetworkObject() {
+        return NetworkObject;
+    }
 }
