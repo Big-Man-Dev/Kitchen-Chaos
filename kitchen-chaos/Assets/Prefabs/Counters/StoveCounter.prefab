@@ -382,7 +382,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6056656521714476885}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -699,6 +699,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2064475386841967404, guid: 2c4b71a160a32fa41a64d668e030da62, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 698609220
+      objectReference: {fileID: 0}
     - target: {fileID: 3880321612574343593, guid: 2c4b71a160a32fa41a64d668e030da62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -801,6 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5422d1ddbe65c3e45a15eac14aebc77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   counterTopPoint: {fileID: 4693433883483335847}
   fryingRecipeSOArray:
   - {fileID: 11400000, guid: 6f7bd20522f14d94b9edace2a56aab4c, type: 2}
