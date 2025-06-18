@@ -13,11 +13,11 @@ public class ClearCounter : BaseCounter
             }else {
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
                     if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) {
-                        GetKitchenObject().DestroySelf();
+                        KitchenObject.DestroyKitchenObject(GetKitchenObject());
                     }
-                } else if (GetKitchenObject().TryGetPlate(out plateKitchenObject)) {
-                    if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO())) {
-                        player.GetKitchenObject().DestroySelf();
+                } else if (GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObjectCounter)) {
+                    if (plateKitchenObjectCounter.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO())) {
+                        KitchenObject.DestroyKitchenObject(player.GetKitchenObject());
                     }
                 }
             }
