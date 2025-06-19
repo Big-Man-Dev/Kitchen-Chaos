@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using System;
 
 public class KitchenGameMultiplayer : NetworkBehaviour
 {
@@ -7,6 +8,24 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     public static KitchenGameMultiplayer Instance { get; private set; }
     private void Awake() {
         Instance = this;
+    }
+
+    public void StartHost() {
+        NetworkManager.ConnectionApprovalCallback += NetworkManager_ConnectionAprovalCallback;
+        NetworkManager.StartHost();
+    }
+
+    private void NetworkManager_ConnectionAprovalCallback(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response) {
+        if (GameManager.Instance.IsWaitingToStart()) {
+            response.Approved = true;
+            response.CreatePlayerObject = true;
+        }else {
+            response.Approved = false;
+        }
+    }
+
+    public void StartClient() {
+        NetworkManager.StartClient();
     }
     public void SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
         SpawnKitchenObjectServerRpc(GetKitchenObjectSOIndex(kitchenObjectSO), kitchenObjectParent.GetNetworkObject());

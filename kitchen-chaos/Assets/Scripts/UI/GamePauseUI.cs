@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class GamePauseUI : MonoBehaviour
             GameManager.Instance.TogglePauseGame();
         });
         mainMenuButton.onClick.AddListener(() => {
+            NetworkManager.Singleton.Shutdown();
             Loader.Load(Loader.Scene.MainMenuScene);
         });
         optionsButton.onClick.AddListener(() => {
@@ -20,14 +22,14 @@ public class GamePauseUI : MonoBehaviour
         });
     }
     private void Start() {
-        GameManager.Instance.OnGamePause += GameManger_OnGamePause;
-        GameManager.Instance.OnGameUnpause += GameManager_OnGameUnpause;
+        GameManager.Instance.OnLocalGamePause += GameManger_OnLocalGamePause;
+        GameManager.Instance.OnLocalGameUnpause += GameManager_OnLocalGameUnpause;
         Hide();
     }
-    private void GameManger_OnGamePause(object sender, System.EventArgs e) {
+    private void GameManger_OnLocalGamePause(object sender, System.EventArgs e) {
         Show();
     }
-    private void GameManager_OnGameUnpause(object sender, System.EventArgs e) {
+    private void GameManager_OnLocalGameUnpause(object sender, System.EventArgs e) {
         Hide();
     }
     private void Show() {

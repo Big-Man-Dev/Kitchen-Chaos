@@ -82,7 +82,7 @@ public class OptionsUI : MonoBehaviour
         });
     }
     private void Start() {
-        GameManager.Instance.OnGameUnpause += GameManager_OnGameUnpause;
+        GameManager.Instance.OnLocalGameUnpause += GameManager_OnGameUnpause;
         UpdateVisual();
         Hide();
     }
