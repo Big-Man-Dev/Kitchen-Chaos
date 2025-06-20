@@ -14,6 +14,9 @@ public class HostDisconnectUI : MonoBehaviour
         NetworkManager.Singleton.OnClientStopped += NetworkManager_OnClientStopped;
         Hide();
     }
+    private void OnDestroy() {
+        NetworkManager.Singleton.OnClientStopped -= NetworkManager_OnClientStopped;
+    }
 
     private void NetworkManager_OnClientStopped(bool obj) {
         Show();

@@ -24,6 +24,7 @@ public class GameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyDict = new();
     private Dictionary<ulong, bool> playerPausedDict = new();
 
+    [SerializeField] private GameObject playerPrefab;
 
     private bool autoTestGamePauseState = false;
     private void Awake() {
@@ -39,8 +40,16 @@ public class GameManager : NetworkBehaviour
         isGamePaused.OnValueChanged += IsGamePaused_OnValueChanged;
         if (IsServer) {
             NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
         }
 
+    }
+
+    private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut) {
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds) {
+            GameObject playerObject = Instantiate(playerPrefab);
+            playerObject.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+        }
     }
 
     private void NetworkManager_OnClientDisconnectCallback(ulong clientId) {
@@ -157,6 +166,7 @@ public class GameManager : NetworkBehaviour
         }
         isGamePaused.Value = false;
     }
+
 
     private enum State {
         WaitingToStart,

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1750307382
+  lastShownTimestamp: 1750395478
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1750307382
+  checkedLastUpdateTimestamp: 1750395479
   lastQOTDResponse:
     questionId: 192
     questionText: 'When would this code cause an error?
@@ -46,26 +46,26 @@ MonoBehaviour:
     answerC: When instanceList has exactly two elements
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1750307382
+  lastQotdTimestamp: 1750395479
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/ultimateOverview70_6FreeUpdate.png
     topText: Learn how to use 70 Tools and Features! (Unity 6 Updated)
     topLink: ultimateunityoverview
     bottomText: My 10+ Years of C# Knowledge in 1 Course!
     bottomLink: csharpcourse
-  lastDynamicHeaderTimestamp: 1750307382
+  lastDynamicHeaderTimestamp: 1750395479
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1750307382
+  websiteLatestMessageTimestamp: 1750395479
   websiteLatestVideos:
     videos:
+    - youTubeId: KrjXYXGdnj8
+      title: How to BREAK your Desktop!
     - youTubeId: AD5HtjUun5g
       title: Which Unity Version should you use?
     - youTubeId: 2UP_g58SDKM
       title: TOP 10 FREE NEW Assets JUNE 2025!
     - youTubeId: jPXFBmfInRQ
       title: YOU can CHANGE the FUTURE of Unity!
-    - youTubeId: IPwIpYP3dvg
-      title: 70 Unity Tools and Features in 16 MINUTES!
-  websiteLatestVideosTimestamp: 1750307382
+  websiteLatestVideosTimestamp: 1750395479
