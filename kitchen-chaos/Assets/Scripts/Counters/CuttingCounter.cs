@@ -54,14 +54,18 @@ public class CuttingCounter : BaseCounter, IHasProgress
 
     [ServerRpc(RequireOwnership = false)]
     private void CutObjectServerRpc() {
+        if (HasKitchenObject() == false && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectSO()) == false) {
+            return;
+        }
         CutObjectClientRpc();
     }
     [ClientRpc]
     private void CutObjectClientRpc() {
+        CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
+        if (cuttingRecipeSO == null) return;
         cuttingProgress++;
         OnCut?.Invoke(this, EventArgs.Empty);
         OnAnyCut?.Invoke(this, EventArgs.Empty);
-        CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
         OnProgressChange?.Invoke(this, new OnProgressChangeEventArgs {
             progressNormalized = (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax
@@ -70,7 +74,15 @@ public class CuttingCounter : BaseCounter, IHasProgress
     }
     [ServerRpc(RequireOwnership = false)]
     private void TestCuttingProgressDoneServerRpc() {
+        if (HasKitchenObject() == false && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectSO()) == false) {
+            return;
+        }
+
         CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
+        if (cuttingRecipeSO == null) {
+            return;
+        }
+
         if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax) {
             KitchenObjectSO outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
             if (outputKitchenObjectSO != null) {
